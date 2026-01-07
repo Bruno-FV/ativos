@@ -2,24 +2,35 @@ package com.hsr.ativos.controller;
 
 
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.hsr.ativos.dtos.MachineDTO;
+import com.hsr.ativos.enums.MachineStatus;
 import com.hsr.ativos.services.ServiceMachines;
 
 @RestController
 @RequestMapping("/machines")
+@CrossOrigin(origins = "http://localhost:8081")
 public class ControllerMachines {
 
-    private final ServiceMachines serviceMachines;
+    private final ServiceMachines service;
 
-    public ControllerMachines(ServiceMachines serviceMachines) {
-        this.serviceMachines = serviceMachines;
+    public ControllerMachines(ServiceMachines service) {
+        this.service = service;
     }
+
     @GetMapping("/all")
-    public ResponseEntity<Iterable<?>> getAllMachines() {
-        Iterable<?> machines = serviceMachines.getAllMachines();
-        return ResponseEntity.ok(machines);
+    public List<MachineDTO> getAllMachines() {
+        return service.getAllMachines();
     }
+
 }
