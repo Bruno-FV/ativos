@@ -25,6 +25,9 @@ public class PopularBanco {
 
     @PostMapping("/add")
     public ResponseEntity<List<Machines>> popularBanco(@RequestBody List<Machines> machinesList) {
+        if (machinesList == null || machinesList.isEmpty()) {
+            return ResponseEntity.ok(List.of());
+        }
         List<Machines> savedMachines = machinesRepo.saveAll(machinesList);
         return ResponseEntity.ok(savedMachines);
     }

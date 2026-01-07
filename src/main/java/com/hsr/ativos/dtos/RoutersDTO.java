@@ -1,0 +1,16 @@
+package com.hsr.ativos.dtos;
+
+import java.util.UUID;
+
+import com.hsr.ativos.enums.RoutersStatus;
+
+public record RoutersDTO(
+    UUID id,
+    String ip,
+    String setor,
+    String SSID,
+    String senhaRedeWifi,
+    String loginConfiguracao,
+    String senhaConfiguracao,
+    RoutersStatus status
+) {}

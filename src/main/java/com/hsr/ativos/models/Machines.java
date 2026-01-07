@@ -35,7 +35,6 @@ public class Machines {
     private String licensaOffice;
     @Enumerated(EnumType.STRING)
     private MachineStatus status;
-    
 
    //constructors
    public Machines() {
