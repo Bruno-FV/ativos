@@ -15,7 +15,7 @@ import com.hsr.ativos.services.ServiceMachines;
 
 @RestController
 @RequestMapping("/machines")
-@CrossOrigin(origins = { "http://localhost:8081", "http://192.168.254.62:8081"})
+
 public class ControllerMachines {
 
     private final ServiceMachines service;

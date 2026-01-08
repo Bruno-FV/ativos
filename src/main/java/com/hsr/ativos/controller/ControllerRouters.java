@@ -13,7 +13,7 @@ import com.hsr.ativos.services.ServiceRouters;
 
 @RestController
 @RequestMapping("/routers")
-@CrossOrigin(origins = "http://localhost:8081")
+
 public class ControllerRouters {
     private final ServiceRouters serviceRouters;
 
