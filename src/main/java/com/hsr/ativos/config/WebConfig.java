@@ -7,15 +7,16 @@ import org.springframework.lang.NonNull;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-     @Override
+
+    @Override
     public void addCorsMappings(@NonNull CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins(
-                "http://localhost:8081",
-                "http://192.168.254.62:8081"
+            .allowedOriginPatterns(
+                "http://localhost:*",
+                "http://192.168.254.62:*"
             )
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-            .allowedHeaders("*")
-            .allowCredentials(false);
+            .allowedHeaders("*");
     }
 }
+

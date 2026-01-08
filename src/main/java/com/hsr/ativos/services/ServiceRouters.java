@@ -49,7 +49,7 @@ public class ServiceRouters {
                 r.getIp(),
                 r.getPorta(),
                 r.getSetor(),
-                r.getSSID(),
+                r.getSsid(),
                 r.getSenhaRedeWifi(),
                 r.getLoginConfiguracao(),
                 r.getSenhaConfiguracao(),

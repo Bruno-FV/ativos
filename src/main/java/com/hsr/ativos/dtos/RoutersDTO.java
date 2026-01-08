@@ -9,7 +9,7 @@ public record RoutersDTO(
     String ip,
     String porta,
     String setor,
-    String SSID,
+    String ssid,
     String senhaRedeWifi,
     String loginConfiguracao,
     String senhaConfiguracao,

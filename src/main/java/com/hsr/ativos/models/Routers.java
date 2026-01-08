@@ -23,7 +23,7 @@ public class Routers {
     private String ip;
     private String porta;
     private String setor;
-    private String SSID;
+    private String ssid;
     private String senhaRedeWifi;
     private String loginConfiguracao;
     private String senhaConfiguracao;
@@ -38,7 +38,7 @@ public class Routers {
         this.ip = ip;
         this.porta = porta;
         this.setor = setor;
-        this.SSID = SSID;
+        this.ssid = ssid;
         this.senhaRedeWifi = senhaRedeWifi;
         this.loginConfiguracao = loginConfiguracao;
         this.senhaConfiguracao = senhaConfiguracao;
