@@ -7,6 +7,7 @@ import com.hsr.ativos.enums.RoutersStatus;
 public record RoutersDTO(
     UUID id,
     String ip,
+    String porta,
     String setor,
     String SSID,
     String senhaRedeWifi,

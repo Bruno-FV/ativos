@@ -21,6 +21,7 @@ public class Routers {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private UUID id;
     private String ip;
+    private String porta;
     private String setor;
     private String SSID;
     private String senhaRedeWifi;
@@ -31,10 +32,11 @@ public class Routers {
 
     // Constructors
     public Routers() {}
-    public Routers(UUID id, String ip, String setor, String SSID,
+    public Routers(UUID id, String ip, String porta, String setor, String SSID,
                       String senhaRedeWifi, String loginConfiguracao, String senhaConfiguracao, RoutersStatus status) {
         this.id = id;
         this.ip = ip;
+        this.porta = porta;
         this.setor = setor;
         this.SSID = SSID;
         this.senhaRedeWifi = senhaRedeWifi;

@@ -25,7 +25,7 @@ public class ServiceRouters {
                 .toList();
     }
     @Transactional
-    @Scheduled(fixedDelay = 30000) // a cada 30s
+    @Scheduled(fixedDelay = 10000) // a cada 30s
     public void updateStatus() {
         List<Routers> routers = routersRepo.findAll();
 
@@ -47,6 +47,7 @@ public class ServiceRouters {
         return new RoutersDTO(
                 r.getId(),
                 r.getIp(),
+                r.getPorta(),
                 r.getSetor(),
                 r.getSSID(),
                 r.getSenhaRedeWifi(),
