@@ -1,0 +1,25 @@
+package com.hsr.ativos.controller;
+
+
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hsr.ativos.dtos.ExtensionsDTO;
+import com.hsr.ativos.services.ServiceExtensions;
+
+@RestController
+@RequestMapping("/extensions")
+public class ControllerExtensions {
+    private final ServiceExtensions serviceExtensions;
+    
+    public ControllerExtensions(ServiceExtensions serviceExtensions) {
+        this.serviceExtensions = serviceExtensions;
+    }
+    @GetMapping("/all")
+    public List<ExtensionsDTO> getAllExtensions() {
+        return serviceExtensions.getAllMachines();
+    }
+}
