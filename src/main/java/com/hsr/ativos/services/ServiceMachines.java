@@ -2,9 +2,11 @@ package com.hsr.ativos.services;
 
 import java.net.InetAddress;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -38,8 +40,10 @@ public class ServiceMachines {
     // 🔹 Apenas atualiza o status no banco
     public void updateStatus() {
         List<Machines> listMachines = machinesRepo.findAll();
-
         listMachines.forEach(machine -> {
+            if (machine.getStatus() == MachineStatus.maintenance) {
+                return; // pula máquinas em manutenção
+            }
             boolean online = ping(machine.getIp());
             machine.setStatus(
                     online ? MachineStatus.online : MachineStatus.offline);
@@ -73,13 +77,17 @@ public class ServiceMachines {
     }
 
     // serviço para salvar máquinas no banco
-    public Machines saveMachines(MachineDTO machineDTO) {
+    public ResponseEntity<?> saveMachines(MachineDTO machineDTO) {
+        List<Machines> machinesWithSameIp = machinesRepo.findAll(machineDTO.ip());
+        if (!machinesWithSameIp.isEmpty()) {
+            return ResponseEntity.status(409).body(Map.of("error", "Já existe uma máquina com esse IP."));
+        }
         var newMachine = new Machines();
         if (machineDTO != null) {
             BeanUtils.copyProperties(machineDTO, newMachine);
         }
         machinesRepo.save(newMachine);
-        return newMachine;
+        return ResponseEntity.status(201).body(newMachine);
     }
 
     // serviço para atualizar máquinas no banco

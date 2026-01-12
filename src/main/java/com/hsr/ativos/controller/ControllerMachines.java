@@ -28,8 +28,8 @@ public class ControllerMachines {
         this.service = service;
     }
     @PostMapping("/save")
-    public ResponseEntity<Machines> saveMachine(@RequestBody MachineDTO machineDTO) {
-        Machines savedMachine = service.saveMachines(machineDTO);
+    public ResponseEntity<?> saveMachine(@RequestBody MachineDTO machineDTO) {
+        ResponseEntity<?> savedMachine = service.saveMachines(machineDTO);
         return ResponseEntity.ok(savedMachine);
     }
 
