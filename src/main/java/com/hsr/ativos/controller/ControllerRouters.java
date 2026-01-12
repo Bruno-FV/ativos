@@ -2,9 +2,13 @@ package com.hsr.ativos.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +27,17 @@ public class ControllerRouters {
     @GetMapping("/all")
     public List<RoutersDTO> getAllRouters() {
         return serviceRouters.getAllRouters();
+    }
+    @PostMapping("/save")
+    public void saveRouters(RoutersDTO routersDTO){
+        serviceRouters.saveRouters(routersDTO);
+    }
+    @PutMapping("/update/{id}")
+    public void updateRouters(@PathVariable UUID id, RoutersDTO routersDTO){
+        serviceRouters.updateRouters(id, routersDTO);
+    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteRouters(@PathVariable UUID id){
+        serviceRouters.deleteRouters(id);
     }
 }

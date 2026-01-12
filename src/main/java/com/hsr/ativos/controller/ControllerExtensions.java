@@ -2,8 +2,12 @@ package com.hsr.ativos.controller;
 
 
 import java.util.List;
+import java.util.UUID;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,5 +25,17 @@ public class ControllerExtensions {
     @GetMapping("/all")
     public List<ExtensionsDTO> getAllExtensions() {
         return serviceExtensions.getAllMachines();
+    }
+    @PostMapping("/save")
+    public void saveExtensions(ExtensionsDTO extensionsDTO){
+        serviceExtensions.saveExtensions(extensionsDTO);
+    }
+    @PutMapping("/update/{id}")
+    public void updateExtensions(UUID id, ExtensionsDTO extensionsDTO){
+        serviceExtensions.updateExtensions(id, extensionsDTO);
+    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteExtensions(UUID id){
+        serviceExtensions.deleteExtensions(id);
     }
 }

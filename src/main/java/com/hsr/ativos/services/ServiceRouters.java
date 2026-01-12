@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.hsr.ativos.dtos.MachineDTO;
+
 import com.hsr.ativos.dtos.RoutersDTO;
 import com.hsr.ativos.repositorys.RoutersRepo;
-import com.hsr.ativos.models.Machines;
 import com.hsr.ativos.models.Routers;
 import com.hsr.ativos.enums.RoutersStatus;
 
