@@ -55,7 +55,7 @@ public class ServiceMachines {
         }
     }
 
-    // 🔹 DTO apenas lê o status já salvo
+    // dto converter
     private MachineDTO toDTO(Machines m) {
         return new MachineDTO(
                 m.getId(),
@@ -84,6 +84,9 @@ public class ServiceMachines {
 
     // serviço para atualizar máquinas no banco
     public Machines updateMachines(UUID id, MachineDTO machineDTO) {
+        if (id == null) {
+            return null;
+        }
         var updateMachines = machinesRepo.findById(id);
         if (updateMachines.isEmpty()) {
             return null;

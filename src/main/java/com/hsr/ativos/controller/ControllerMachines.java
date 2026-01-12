@@ -1,7 +1,5 @@
 package com.hsr.ativos.controller;
 
-
-
 import java.util.List;
 import java.util.UUID;
 
