@@ -52,6 +52,7 @@ public class ServiceExtensions {
         if(extensionsDTO == null){
             return ResponseEntity.status(400).body("ExtensionsDTO não pode ser nulo");
         }
+        //faz a busca do ramal no banco
         var updateExtensions = extensionsRepo.findById(id);
         if(updateExtensions.isEmpty()){
             return ResponseEntity.status(404).body("Ramal com id " + id + " não encontrado");
@@ -74,6 +75,7 @@ public class ServiceExtensions {
             extensionsRepo.deleteById(id);
             return ResponseEntity.ok("Ramal deletado com sucesso");
         }
-        return ResponseEntity.status(404).body("Ramal não encontrado");
+        return ResponseEntity.status(404).body("Ramal não encontrado"); 
+
     }
 }
