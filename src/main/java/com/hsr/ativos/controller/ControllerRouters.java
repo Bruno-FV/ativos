@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,11 +30,11 @@ public class ControllerRouters {
         return serviceRouters.getAllRouters();
     }
     @PostMapping("/save")
-    public void saveRouters(RoutersDTO routersDTO){
+    public void saveRouters(@RequestBody RoutersDTO routersDTO){
         serviceRouters.saveRouters(routersDTO);
     }
     @PutMapping("/update/{id}")
-    public void updateRouters(@PathVariable UUID id, RoutersDTO routersDTO){
+    public void updateRouters(@PathVariable UUID id, @RequestBody RoutersDTO routersDTO){
         serviceRouters.updateRouters(id, routersDTO);
     }
     @DeleteMapping("/delete/{id}")

@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import com.hsr.ativos.enums.RoutersStatus;
 
+import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -33,7 +35,7 @@ public class Routers {
     // Constructors
     public Routers() {}
     public Routers(UUID id, String ip, String porta, String setor, String ssid,
-                      String senhaRedeWifi, String loginConfiguracao, String senhaConfiguracao, RoutersStatus status) {
+            String senhaRedeWifi, String loginConfiguracao, String senhaConfiguracao, RoutersStatus status) {
         this.id = id;
         this.ip = ip;
         this.porta = porta;

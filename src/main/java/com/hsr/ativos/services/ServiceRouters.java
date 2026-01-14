@@ -7,12 +7,14 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
-
+import com.hsr.ativos.dtos.MachineDTO;
 import com.hsr.ativos.dtos.RoutersDTO;
-import com.hsr.ativos.repositorys.RoutersRepo;
-import com.hsr.ativos.models.Routers;
 import com.hsr.ativos.enums.RoutersStatus;
+import com.hsr.ativos.models.Machines;
+import com.hsr.ativos.models.Routers;
+import com.hsr.ativos.repositorys.RoutersRepo;
 
 import jakarta.transaction.Transactional;
 
@@ -71,25 +73,22 @@ public class ServiceRouters {
         return newRouter;
     }
     //atualizar roteador
-    public ResponseEntity<String> updateRouters(UUID id,RoutersDTO routersDTO){
-        //validação que id recebido do front não é nulo
-        if(id == null){
-            return ResponseEntity.status(404).body("id não encontrado");
+   public Routers updateRouters(UUID id, @RequestBody RoutersDTO routersDTO) {
+        if (id == null) {
+            return null;
         }
-        //validação que o dto recebido do front não é nulo
-        if(routersDTO == null){
-            return ResponseEntity.status(400).body("RoutersDTO não pode ser nulo");
+        var updateRouters = routersRepo.findById(id);
+        if (updateRouters.isEmpty()) {
+            return null;
         }
-        var updateRouter = routersRepo.findById(id);
-        if(updateRouter.isPresent()){
-            Routers router = updateRouter.get();
-            if(router != null){
-                BeanUtils.copyProperties(routersDTO, router);
-                routersRepo.save(router);
-                return ResponseEntity.ok("Roteador atualizado com sucesso");
-            }
+        var newUpdate = updateRouters.get();
+        if (routersDTO != null && newUpdate != null) {
+            BeanUtils.copyProperties(routersDTO, newUpdate);
         }
-        return ResponseEntity.status(404).body("Roteador não encontrado");
+        if (newUpdate == null) {
+            return null;
+        }
+        return routersRepo.save(newUpdate);
     }
     //deletar roteador
     public ResponseEntity<String> deleteRouters(UUID id){

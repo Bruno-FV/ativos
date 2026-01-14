@@ -6,8 +6,10 @@ import java.util.UUID;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,15 +29,15 @@ public class ControllerExtensions {
         return serviceExtensions.getAllMachines();
     }
     @PostMapping("/save")
-    public void saveExtensions(ExtensionsDTO extensionsDTO){
+    public void saveExtensions(@RequestBody ExtensionsDTO extensionsDTO){
         serviceExtensions.saveExtensions(extensionsDTO);
     }
     @PutMapping("/update/{id}")
-    public void updateExtensions(UUID id, ExtensionsDTO extensionsDTO){
+    public void updateExtensions(UUID id, @RequestBody ExtensionsDTO extensionsDTO){
         serviceExtensions.updateExtensions(id, extensionsDTO);
     }
     @DeleteMapping("/delete/{id}")
-    public void deleteExtensions(UUID id){
+    public void deleteExtensions(@PathVariable UUID id){
         serviceExtensions.deleteExtensions(id);
     }
 }

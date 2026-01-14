@@ -4,6 +4,9 @@ import java.util.UUID;
 
 import com.hsr.ativos.enums.RoutersStatus;
 
+
+
+
 public record RoutersDTO(
     UUID id,
     String ip,
