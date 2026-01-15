@@ -27,22 +27,24 @@ public class ControllerMachines {
     public ControllerMachines(ServiceMachines service) {
         this.service = service;
     }
-    @PostMapping("/save")
-    public ResponseEntity<?> saveMachine(@RequestBody MachineDTO machineDTO) {
-        ResponseEntity<?> savedMachine = service.saveMachines(machineDTO);
-        return ResponseEntity.ok(savedMachine);
-    }
 
     @GetMapping("/all")
     ResponseEntity<List<MachineDTO>> getAllMachines() {
         List<MachineDTO> machines = service.getAllMachines();
         return ResponseEntity.ok(machines);
     }
+
+    @PostMapping("/save")
+    public ResponseEntity<?> saveMachine(@RequestBody MachineDTO machineDTO) {
+        return service.saveMachines(machineDTO);
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<Machines> updateMachine(@PathVariable UUID id, @RequestBody MachineDTO machineDTO) {
         Machines updatedMachine = service.updateMachines(id, machineDTO);
         return ResponseEntity.ok(updatedMachine);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Void> deleteMachine(@PathVariable UUID id) {
         service.deleteMachine(id);

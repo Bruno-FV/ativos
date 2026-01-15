@@ -1,6 +1,5 @@
 package com.hsr.ativos.controller;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hsr.ativos.models.Machines;
 import com.hsr.ativos.repositorys.MachinesRepo;
-
-
 
 @RestController
 @RequestMapping("/popular-banco")

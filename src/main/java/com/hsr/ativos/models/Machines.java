@@ -1,6 +1,5 @@
 package com.hsr.ativos.models;
 
-
 import java.util.UUID;
 
 import com.hsr.ativos.enums.MachineStatus;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Setter
 public class Machines {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(nullable = false, unique = true)
     private String hostName;
@@ -36,23 +35,25 @@ public class Machines {
     @Enumerated(EnumType.STRING)
     private MachineStatus status;
 
-   //constructors
-   public Machines() {
+    // constructors
+    public Machines() {
     }
+
     public Machines(UUID id, String hostName, String ip, String sistemaOperacional, String setor,
-                     String processador, String memoria, String armazenamento, String tipoArmazenamento, String antVirus, String licensaOffice, MachineStatus status) {
-         this.id = id;
-         this.hostName = hostName;
-         this.ip = ip;
-         this.sistemaOperacional = sistemaOperacional;
-         this.setor = setor;
-         this.processador = processador;
-         this.memoria = memoria;
-         this.armazenamento = armazenamento;
-         this.tipoArmazenamento = tipoArmazenamento;
+            String processador, String memoria, String armazenamento, String tipoArmazenamento, String antVirus,
+            String licensaOffice, MachineStatus status) {
+        this.id = id;
+        this.hostName = hostName;
+        this.ip = ip;
+        this.sistemaOperacional = sistemaOperacional;
+        this.setor = setor;
+        this.processador = processador;
+        this.memoria = memoria;
+        this.armazenamento = armazenamento;
+        this.tipoArmazenamento = tipoArmazenamento;
         this.antVirus = antVirus;
         this.licensaOffice = licensaOffice;
         this.status = status;
-       
+
     }
 }

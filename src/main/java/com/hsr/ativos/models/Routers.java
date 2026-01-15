@@ -20,8 +20,9 @@ import lombok.Setter;
 @Setter
 public class Routers {
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(unique = true, nullable = false)
     private String ip;
     private String porta;
     private String setor;
@@ -33,7 +34,9 @@ public class Routers {
     private RoutersStatus status;
 
     // Constructors
-    public Routers() {}
+    public Routers() {
+    }
+
     public Routers(UUID id, String ip, String porta, String setor, String ssid,
             String senhaRedeWifi, String loginConfiguracao, String senhaConfiguracao, RoutersStatus status) {
         this.id = id;

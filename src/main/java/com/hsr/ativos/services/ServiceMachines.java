@@ -6,9 +6,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.hsr.ativos.dtos.MachineDTO;
 import com.hsr.ativos.enums.MachineStatus;
@@ -77,7 +79,7 @@ public class ServiceMachines {
     }
 
     // serviço para salvar máquinas no banco
-    public ResponseEntity<?> saveMachines(MachineDTO machineDTO) {
+    public ResponseEntity<?> saveMachines(@RequestBody MachineDTO machineDTO) {
         List<Machines> machinesWithSameIp = machinesRepo.findAll(machineDTO.ip());
         if (!machinesWithSameIp.isEmpty()) {
             return ResponseEntity.status(409).body(Map.of("error", "Já existe uma máquina com esse IP."));
@@ -86,8 +88,12 @@ public class ServiceMachines {
         if (machineDTO != null) {
             BeanUtils.copyProperties(machineDTO, newMachine);
         }
-        machinesRepo.save(newMachine);
-        return ResponseEntity.status(201).body(newMachine);
+        try {
+            machinesRepo.save(newMachine);
+            return ResponseEntity.status(201).body(newMachine);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(400).body(Map.of("error", "HostName já existente."));
+        }
     }
 
     // serviço para atualizar máquinas no banco

@@ -1,6 +1,5 @@
 package com.hsr.ativos.controller;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -20,24 +19,28 @@ import com.hsr.ativos.services.ServiceExtensions;
 @RequestMapping("/extensions")
 public class ControllerExtensions {
     private final ServiceExtensions serviceExtensions;
-    
+
     public ControllerExtensions(ServiceExtensions serviceExtensions) {
         this.serviceExtensions = serviceExtensions;
     }
+
     @GetMapping("/all")
     public List<ExtensionsDTO> getAllExtensions() {
         return serviceExtensions.getAllMachines();
     }
+
     @PostMapping("/save")
-    public void saveExtensions(@RequestBody ExtensionsDTO extensionsDTO){
+    public void saveExtensions(@RequestBody ExtensionsDTO extensionsDTO) {
         serviceExtensions.saveExtensions(extensionsDTO);
     }
+
     @PutMapping("/update/{id}")
-    public void updateExtensions(UUID id, @RequestBody ExtensionsDTO extensionsDTO){
+    public void updateExtensions(UUID id, @RequestBody ExtensionsDTO extensionsDTO) {
         serviceExtensions.updateExtensions(id, extensionsDTO);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void deleteExtensions(@PathVariable UUID id){
+    public void deleteExtensions(@PathVariable UUID id) {
         serviceExtensions.deleteExtensions(id);
     }
 }

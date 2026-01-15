@@ -1,6 +1,5 @@
 package com.hsr.ativos.repositorys;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -14,5 +13,5 @@ import com.hsr.ativos.models.Machines;
 @Repository
 public interface MachinesRepo extends JpaRepository<Machines, UUID> {
     @Query("SELECT m FROM Machines m WHERE m.ip = :ip")
-    List<Machines> findAll(@Param ("ip") String ip);
+    List<Machines> findAll(@Param("ip") String ip);
 }

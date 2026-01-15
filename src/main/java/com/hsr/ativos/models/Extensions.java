@@ -19,9 +19,10 @@ public class Extensions {
     private String setor;
     private String ramal;
 
-public Extensions() {}
+    public Extensions() {
+    }
 
-public Extensions(UUID id, String setor, String ramal) {
+    public Extensions(UUID id, String setor, String ramal) {
         this.id = id;
         this.setor = setor;
         this.ramal = ramal;

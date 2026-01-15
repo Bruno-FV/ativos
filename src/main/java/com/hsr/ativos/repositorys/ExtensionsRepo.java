@@ -10,5 +10,4 @@ import com.hsr.ativos.models.Extensions;
 @Repository
 public interface ExtensionsRepo extends JpaRepository<Extensions, UUID> {
 
-    
 }
