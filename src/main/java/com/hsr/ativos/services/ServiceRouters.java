@@ -1,6 +1,5 @@
 package com.hsr.ativos.services;
 
-import java.io.ObjectInputFilter.Status;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -12,10 +11,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.hsr.ativos.dtos.MachineDTO;
 import com.hsr.ativos.dtos.RoutersDTO;
 import com.hsr.ativos.enums.RoutersStatus;
-import com.hsr.ativos.models.Machines;
 import com.hsr.ativos.models.Routers;
 import com.hsr.ativos.repositorys.RoutersRepo;
 
