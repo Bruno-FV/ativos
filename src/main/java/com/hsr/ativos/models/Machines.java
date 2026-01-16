@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -32,6 +33,8 @@ public class Machines {
     private String tipoArmazenamento;
     private String antVirus;
     private String licensaOffice;
+    @ManyToOne
+    private AntVirus antVirusLicense;
     @Enumerated(EnumType.STRING)
     private MachineStatus status;
 
@@ -41,7 +44,7 @@ public class Machines {
 
     public Machines(UUID id, String hostName, String ip, String sistemaOperacional, String setor,
             String processador, String memoria, String armazenamento, String tipoArmazenamento, String antVirus,
-            String licensaOffice, MachineStatus status) {
+            String licensaOffice, AntVirus antVirusLicense, MachineStatus status) {
         this.id = id;
         this.hostName = hostName;
         this.ip = ip;
@@ -53,6 +56,7 @@ public class Machines {
         this.tipoArmazenamento = tipoArmazenamento;
         this.antVirus = antVirus;
         this.licensaOffice = licensaOffice;
+        this.antVirusLicense = antVirusLicense;
         this.status = status;
 
     }

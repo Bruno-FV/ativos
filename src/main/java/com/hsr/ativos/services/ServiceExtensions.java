@@ -20,7 +20,7 @@ public class ServiceExtensions {
     }
 
     // listar todos os ramais
-    public List<ExtensionsDTO> getAllMachines() {
+    public List<ExtensionsDTO> getAllExtensions() {
         return extensionsRepo.findAll()
                 .stream()
                 .map(this::toDTO)

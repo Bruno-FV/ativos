@@ -26,7 +26,7 @@ public class ControllerExtensions {
 
     @GetMapping("/all")
     public List<ExtensionsDTO> getAllExtensions() {
-        return serviceExtensions.getAllMachines();
+        return serviceExtensions.getAllExtensions();
     }
 
     @PostMapping("/save")
