@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hsr.ativos.models.Machines;
 import com.hsr.ativos.repositorys.MachinesRepo;
 
-import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/popular-banco")
