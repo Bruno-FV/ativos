@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hsr.ativos.enums.AntiVirusStatus;
 
@@ -26,18 +27,23 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AntVirus {
+public class AntiVirus {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     @Column(unique = true, nullable = false)
-    @OneToMany
     private String keyLisence;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateStartLisence;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateEndLisence;
-    @OneToMany(mappedBy="antVirus")
+
+    @OneToMany(mappedBy="antVirusLicense")
     @JsonIgnore
     private List <Machines> machine;
+    
     private String registrationDate;
     @Enumerated(EnumType.STRING)
     private AntiVirusStatus status;

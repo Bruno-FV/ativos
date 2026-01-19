@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hsr.ativos.models.Machines;
 import com.hsr.ativos.repositorys.MachinesRepo;
 
+import jakarta.transaction.Transactional;
+
 @RestController
 @RequestMapping("/popular-banco")
 public class PopularBanco {
@@ -19,7 +21,6 @@ public class PopularBanco {
     public PopularBanco(MachinesRepo machinesRepo) {
         this.machinesRepo = machinesRepo;
     }
-
     @PostMapping("/add")
     public ResponseEntity<List<Machines>> popularBanco(@RequestBody List<Machines> machinesList) {
         if (machinesList == null || machinesList.isEmpty()) {

@@ -12,13 +12,18 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Machines {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -34,30 +39,7 @@ public class Machines {
     private String antVirus;
     private String licensaOffice;
     @ManyToOne
-    private AntVirus antVirusLicense;
+    private AntiVirus antVirusLicense;
     @Enumerated(EnumType.STRING)
     private MachineStatus status;
-
-    // constructors
-    public Machines() {
-    }
-
-    public Machines(UUID id, String hostName, String ip, String sistemaOperacional, String setor,
-            String processador, String memoria, String armazenamento, String tipoArmazenamento, String antVirus,
-            String licensaOffice, AntVirus antVirusLicense, MachineStatus status) {
-        this.id = id;
-        this.hostName = hostName;
-        this.ip = ip;
-        this.sistemaOperacional = sistemaOperacional;
-        this.setor = setor;
-        this.processador = processador;
-        this.memoria = memoria;
-        this.armazenamento = armazenamento;
-        this.tipoArmazenamento = tipoArmazenamento;
-        this.antVirus = antVirus;
-        this.licensaOffice = licensaOffice;
-        this.antVirusLicense = antVirusLicense;
-        this.status = status;
-
-    }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.hsr.ativos.dtos.MachineDTO;
 import com.hsr.ativos.enums.MachineStatus;
 import com.hsr.ativos.models.Machines;
+import com.hsr.ativos.repositorys.AntiVirusRepo;
 import com.hsr.ativos.repositorys.MachinesRepo;
 
 import jakarta.transaction.Transactional;
@@ -23,9 +24,11 @@ import jakarta.transaction.Transactional;
 public class ServiceMachines {
 
     private final MachinesRepo machinesRepo;
+    private final AntiVirusRepo antiVirusRepo;
 
-    public ServiceMachines(MachinesRepo machinesRepo) {
+    public ServiceMachines(MachinesRepo machinesRepo, AntiVirusRepo antiVirusRepo) {
         this.machinesRepo = machinesRepo;
+        this.antiVirusRepo = antiVirusRepo;
     }
 
     // busca todas as máquinas no banco
@@ -75,18 +78,28 @@ public class ServiceMachines {
                 m.getTipoArmazenamento(),
                 m.getAntVirus(),
                 m.getLicensaOffice(),
+                m.getAntVirusLicense() != null ? m.getAntVirusLicense().getId() : null, // Alterado para antVirusLicense para corresponder ao DTO
                 m.getStatus());
     }
-
     // serviço para salvar máquinas no banco
     public ResponseEntity<?> saveMachines(@RequestBody MachineDTO machineDTO) {
         List<Machines> machinesWithSameIp = machinesRepo.findAll(machineDTO.ip());
         if (!machinesWithSameIp.isEmpty()) {
             return ResponseEntity.status(409).body(Map.of("error", "Já existe uma máquina com esse IP."));
         }
+
         var newMachine = new Machines();
         if (machineDTO != null) {
             BeanUtils.copyProperties(machineDTO, newMachine);
+            // Vincular licença se fornecida
+            if (machineDTO.antVirusLicense() != null) { // Alterado de antVirusLicenseId() para antVirusLicense() para corresponder ao DTO
+                var license = antiVirusRepo.findById(machineDTO.antVirusLicense());
+                if (license.isPresent()) {
+                    newMachine.setAntVirusLicense(license.get());
+                } else {
+                    return ResponseEntity.status(400).body(Map.of("error", "Licença não encontrada"));
+                }
+            }
         }
         try {
             machinesRepo.save(newMachine);
@@ -108,6 +121,16 @@ public class ServiceMachines {
         var newUpdate = updateMachines.get();
         if (machineDTO != null && newUpdate != null) {
             BeanUtils.copyProperties(machineDTO, newUpdate);
+            // Vincular licença se fornecida
+            if (machineDTO.antVirusLicense() != null) { // Alterado de antVirusLicenseId() para antVirusLicense() para corresponder ao DTO
+                var license = antiVirusRepo.findById(machineDTO.antVirusLicense());
+                if (license.isPresent()) {
+                    newUpdate.setAntVirusLicense(license.get());
+                } else {
+                    newUpdate.setAntVirusLicense(null); // Remove vínculo se ID não fornecido
+                    // Não retorna erro aqui, apenas não vincula
+                }
+            }
         }
         if (newUpdate == null) {
             return null;
