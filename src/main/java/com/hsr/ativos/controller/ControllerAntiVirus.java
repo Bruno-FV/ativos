@@ -18,7 +18,7 @@ import com.hsr.ativos.models.AntiVirus;
 import com.hsr.ativos.services.ServiceAntiVirus;
 
 @RestController
-@RequestMapping("/antivirus")
+@RequestMapping("/licenses")
 public class ControllerAntiVirus {
 
     private final ServiceAntiVirus service;
@@ -39,6 +39,12 @@ public class ControllerAntiVirus {
         return ResponseEntity.ok(licenses);
     }
 
+    @GetMapping("/with-machines/{id}")
+    public ResponseEntity<AntiVirusDTO> getLicensesWithMachinesId(@PathVariable UUID id) {
+        AntiVirusDTO dto = service.getLicensesWithMachinesId(id);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping("/save")
     public ResponseEntity<?> saveLicense(@RequestBody AntiVirusDTO antiVirusDTO) {
         return service.saveLicense(antiVirusDTO);
@@ -52,11 +58,5 @@ public class ControllerAntiVirus {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteLicense(@PathVariable UUID id) {
         return service.deleteLicense(id);
-    }
-
-    @PostMapping("/check-expired")
-    public ResponseEntity<String> checkExpiredLicenses() {
-        service.checkAndUpdateExpiredLicenses();
-        return ResponseEntity.ok("Verificação de licenças expiradas concluída");
     }
 }

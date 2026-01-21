@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import com.hsr.ativos.enums.MachineStatus;
 
-import lombok.NonNull;
-
 public record MachineDTO(
         UUID id,
         String hostName,
@@ -16,12 +14,12 @@ public record MachineDTO(
         String memoria,
         String armazenamento,
         String tipoArmazenamento,
-        String antVirus,
         String licensaOffice,
-        @NonNull UUID antVirusLicense,
+        String antVirusLicense, // Alterado para String para aceitar valores como "active" ou UUID
         MachineStatus status) {
+
     // Construtor customizado que normaliza os campos de texto
-    public MachineDTO {
+    public MachineDTO            {
         // this = canonical constructor (não precisa chamar super)
         hostName = normalizeUpper(hostName);
         ip = normalizeTrim(ip);
@@ -31,7 +29,6 @@ public record MachineDTO(
         memoria = normalizeUpper(memoria);
         armazenamento = normalizeUpper(armazenamento);
         tipoArmazenamento = normalizeUpper(tipoArmazenamento);
-        antVirus = normalizeUpper(antVirus);
         licensaOffice = normalizeUpper(licensaOffice);
     }
 

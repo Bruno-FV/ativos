@@ -36,7 +36,7 @@ public class Machines {
     private String memoria;
     private String armazenamento;
     private String tipoArmazenamento;
-    private String antVirus;
+    //sprivate String antVirus;
     private String licensaOffice;
     @ManyToOne
     private AntiVirus antVirusLicense;

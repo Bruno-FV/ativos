@@ -56,6 +56,7 @@ public class ServiceMachines {
     }
 
     // 🔹 Ping APENAS aqui
+    @SuppressWarnings("null")
     private boolean ping(String ip) {
         try {
             return InetAddress.getByName(ip).isReachable(1500);
@@ -76,12 +77,13 @@ public class ServiceMachines {
                 m.getMemoria(),
                 m.getArmazenamento(),
                 m.getTipoArmazenamento(),
-                m.getAntVirus(),
                 m.getLicensaOffice(),
-                m.getAntVirusLicense() != null ? m.getAntVirusLicense().getId() : null, // Alterado para antVirusLicense para corresponder ao DTO
+                m.getAntVirusLicense() != null ? m.getAntVirusLicense().getId().toString() : null, // Convertido para String para corresponder ao DTO
                 m.getStatus());
     }
+
     // serviço para salvar máquinas no banco
+    @SuppressWarnings("null")
     public ResponseEntity<?> saveMachines(@RequestBody MachineDTO machineDTO) {
         List<Machines> machinesWithSameIp = machinesRepo.findAll(machineDTO.ip());
         if (!machinesWithSameIp.isEmpty()) {
@@ -92,12 +94,18 @@ public class ServiceMachines {
         if (machineDTO != null) {
             BeanUtils.copyProperties(machineDTO, newMachine);
             // Vincular licença se fornecida
-            if (machineDTO.antVirusLicense() != null) { // Alterado de antVirusLicenseId() para antVirusLicense() para corresponder ao DTO
-                var license = antiVirusRepo.findById(machineDTO.antVirusLicense());
-                if (license.isPresent()) {
-                    newMachine.setAntVirusLicense(license.get());
-                } else {
-                    return ResponseEntity.status(400).body(Map.of("error", "Licença não encontrada"));
+            if (machineDTO.antVirusLicense() != null && !machineDTO.antVirusLicense().isEmpty()) {
+                try {
+                    UUID licenseId = UUID.fromString(machineDTO.antVirusLicense());
+                    var license = antiVirusRepo.findById(licenseId);
+                    if (license.isPresent()) {
+                        newMachine.setAntVirusLicense(license.get());
+                    } else {
+                        return ResponseEntity.status(400).body(Map.of("error", "Licença não encontrada"));
+                    }
+                } catch (IllegalArgumentException e) {
+                    // Se não for um UUID válido, ignorar ou definir como null
+                    newMachine.setAntVirusLicense(null);
                 }
             }
         }
@@ -110,6 +118,7 @@ public class ServiceMachines {
     }
 
     // serviço para atualizar máquinas no banco
+    @SuppressWarnings("null")
     public Machines updateMachines(UUID id, MachineDTO machineDTO) {
         if (id == null) {
             return null;
@@ -122,13 +131,19 @@ public class ServiceMachines {
         if (machineDTO != null && newUpdate != null) {
             BeanUtils.copyProperties(machineDTO, newUpdate);
             // Vincular licença se fornecida
-            if (machineDTO.antVirusLicense() != null) { // Alterado de antVirusLicenseId() para antVirusLicense() para corresponder ao DTO
-                var license = antiVirusRepo.findById(machineDTO.antVirusLicense());
-                if (license.isPresent()) {
-                    newUpdate.setAntVirusLicense(license.get());
-                } else {
-                    newUpdate.setAntVirusLicense(null); // Remove vínculo se ID não fornecido
-                    // Não retorna erro aqui, apenas não vincula
+            if (machineDTO.antVirusLicense() != null && !machineDTO.antVirusLicense().isEmpty()) {
+                try {
+                    UUID licenseId = UUID.fromString(machineDTO.antVirusLicense());
+                    var license = antiVirusRepo.findById(licenseId);
+                    if (license.isPresent()) {
+                        newUpdate.setAntVirusLicense(license.get());
+                    } else {
+                        newUpdate.setAntVirusLicense(null); // Remove vínculo se ID não fornecido
+                        // Não retorna erro aqui, apenas não vincula
+                    }
+                } catch (IllegalArgumentException e) {
+                    // Se não for um UUID válido, definir como null
+                    newUpdate.setAntVirusLicense(null);
                 }
             }
         }
