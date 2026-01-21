@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.hsr.ativos.models.Users;
 
 @Repository
+
 public interface UserRepo extends JpaRepository<Users, UUID> {
     Optional<Users> findByEmail(String email);
 }
