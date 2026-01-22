@@ -22,6 +22,7 @@ public class JwtUtil {
      * Chave secreta utilizada para assinar os tokens JWT.
      * Em produção, esta chave deve ser armazenada de forma segura (ex: variáveis de ambiente).
      */
+    @SuppressWarnings("deprecation")
     private final Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     /**
@@ -36,6 +37,7 @@ public class JwtUtil {
      * @param role Role do usuário (ex: ROLE_ADMIN, ROLE_USER)
      * @return Token JWT gerado
      */
+    @SuppressWarnings("deprecation")
     public String generateToken(String email, String role) {
         return Jwts.builder()
                 .setSubject(email)  // Define o email como subject do token
