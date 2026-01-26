@@ -29,6 +29,11 @@ public class ControllerExtensions {
         return serviceExtensions.getAllExtensions();
     }
 
+    @GetMapping("/public")
+    public List<ExtensionsDTO> getPublicExtensions() {
+        return serviceExtensions.getAllExtensions();
+    }
+
     @PostMapping("/save")
     public void saveExtensions(@RequestBody ExtensionsDTO extensionsDTO) {
         serviceExtensions.saveExtensions(extensionsDTO);
