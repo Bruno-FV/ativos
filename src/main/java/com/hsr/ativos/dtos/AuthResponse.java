@@ -25,6 +25,8 @@ public class AuthResponse {
      */
     private String role;
 
+    private String name;
+
     /**
      * Construtor padrão necessário para desserialização JSON.
      */
@@ -38,10 +40,11 @@ public class AuthResponse {
      * @param email Email do usuário
      * @param role Role do usuário
      */
-    public AuthResponse(String token, String email, String role) {
+    public AuthResponse(String token, String email, String role, String name) {
         this.token = token;
         this.email = email;
         this.role = role;
+        this.name = name;
     }
 
     /**
@@ -97,6 +100,12 @@ public class AuthResponse {
     public void setRole(String role) {
         this.role = role;
     }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 
     /**
      * Representação em string do objeto para depuração.
@@ -109,6 +118,7 @@ public class AuthResponse {
                 "token='[PROTECTED]'" +  // Não exibir token completo em logs por segurança
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

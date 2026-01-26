@@ -124,7 +124,7 @@ public class AuthController {
             String token = jwtUtil.generateToken(user.getEmail(), user.getRole().name());
 
             // Cria resposta com token e informações do usuário
-            AuthResponse response = new AuthResponse(token, user.getEmail(), user.getRole().name());
+            AuthResponse response = new AuthResponse(token, user.getEmail(), user.getRole().name(), user.getName());
 
             return ResponseEntity.ok(response);
 
