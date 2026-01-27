@@ -73,7 +73,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
         var checkEmail = repository.findByEmail(request.getEmail());
-        if (checkEmail == null) {
+        if (checkEmail != null) {
             Users user = new Users();
             user.setName(request.getName());
             user.setSector(request.getSector());
@@ -104,6 +104,7 @@ public class AuthController {
      * @return ResponseEntity com AuthResponse contendo token JWT ou erro
      */
     @PostMapping("/login")
+    @SuppressWarnings("UseSpecificCatch")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         try {
             // Cria token de autenticação com email e senha
