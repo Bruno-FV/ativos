@@ -3,30 +3,41 @@ services:
   db:
     image: postgres:15
     environment:
-      POSTGRES_DB: ativos
-      POSTGRES_USER: dev
-      POSTGRES_PASSWORD: devpass
+      POSTGRES_DB: bd_ativos
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dtihsr@2018
     volumes:
       - db_data:/var/lib/postgresql/data
     networks:
-      - backend
+      - ativos-network
 
   back-ativos:
     build: .
     ports:
-      - "8080:8080"
+      - "8081:8081"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/ativos
-      SPRING_DATASOURCE_USERNAME: dev
-      SPRING_DATASOURCE_PASSWORD: devpass
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/bd_ativos
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: dtihsr@2018
     depends_on:
       - db
     networks:
-      - backend
+      - ativos-network
+
+  front-ativos:
+    build:
+      context: ../front-ativos-main
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - back-ativos
+    networks:
+      - ativos-network
 
 volumes:
   db_data:
 
 networks:
-  backend:
+  ativos-network:
     driver: bridge

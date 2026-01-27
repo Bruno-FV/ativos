@@ -15,10 +15,12 @@ import com.hsr.ativos.repositorys.RoutersRepo;
 @RequestMapping("/popular-routers")
 public class PopularRouters {
     private final RoutersRepo routersRepo;
+
     public PopularRouters(RoutersRepo routersRepo) {
         this.routersRepo = routersRepo;
     }
-      @PostMapping("/add")
+
+    @PostMapping("/add")
     public ResponseEntity<List<Routers>> popularRouters(@RequestBody List<Routers> routersList) {
         if (routersList == null || routersList.isEmpty()) {
             return ResponseEntity.ok(List.of());

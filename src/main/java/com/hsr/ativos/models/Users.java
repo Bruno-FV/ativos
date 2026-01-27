@@ -2,7 +2,7 @@ package com.hsr.ativos.models;
 
 import java.util.UUID;
 
-import com.hsr.ativos.enums.MachineStatus;
+import com.hsr.ativos.enums.Role;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,24 +21,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Machines {
-
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(nullable = false, unique = true)
-    private String hostName;
-    private String ip;
-    private String sistemaOperacional;
-    private String setor;
-    private String processador;
-    private String memoria;
-    private String armazenamento;
-    private String tipoArmazenamento;
-    //sprivate String antVirus;
-    private String licensaOffice;
-    @ManyToOne
-    private AntiVirus antVirusLicense;
+    private String name;
+    private String sector;
+
+    @Column(unique = true, nullable = false)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
     @Enumerated(EnumType.STRING)
-    private MachineStatus status;
+    @Column(nullable = false)
+    private Role role;
 }

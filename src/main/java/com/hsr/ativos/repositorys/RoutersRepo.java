@@ -9,5 +9,4 @@ import com.hsr.ativos.models.Routers;
 
 @Repository
 public interface RoutersRepo extends JpaRepository<Routers, UUID> {
-    
 }

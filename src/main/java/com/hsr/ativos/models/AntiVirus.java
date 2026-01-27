@@ -1,8 +1,11 @@
 package com.hsr.ativos.models;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
-import com.hsr.ativos.enums.MachineStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.hsr.ativos.enums.AntiVirusStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,24 +25,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Machines {
+public class AntiVirus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @Column(nullable = false, unique = true)
-    private String hostName;
-    private String ip;
-    private String sistemaOperacional;
-    private String setor;
-    private String processador;
-    private String memoria;
-    private String armazenamento;
-    private String tipoArmazenamento;
-    //sprivate String antVirus;
-    private String licensaOffice;
-    @ManyToOne
-    private AntiVirus antVirusLicense;
+
+    @Column(unique = true, nullable = false)
+    private String keyLisence;
+    private LocalDate dateStartLisence;
+    private LocalDate dateEndLisence;
+    @OneToMany(mappedBy = "antVirusLicense")
+    @JsonIgnore
+    private List<Machines> machine;
+    private LocalDate registrationDate;
     @Enumerated(EnumType.STRING)
-    private MachineStatus status;
+    private AntiVirusStatus status;
+    private String versionAntiVirus;
+
 }
