@@ -1,0 +1,318 @@
+[
+    {
+        "setor": "ADMINISTRAÇÃO",
+        "ramal": 320
+    },
+    {
+        "setor": "ALMOXARIFADO",
+        "ramal": 261
+    },
+    {
+        "setor": "ARQUIVO",
+        "ramal": 285
+    },
+    {
+        "setor": "ARQUIVO GERAL",
+        "ramal": 282
+    },
+    {
+        "setor": "ASSISTÊNCIA SOCIAL",
+        "ramal": 260
+    },
+    {
+        "setor": "AUTORIZAÇÃO",
+        "ramal": 220
+    },
+    {
+        "setor": "CAF",
+        "ramal": 283
+    },
+    {
+        "setor": "CCIH",
+        "ramal": 325
+    },
+    {
+        "setor": "CENTRO CIRÚRGICO",
+        "ramal": 249
+    },
+    {
+        "setor": "CLINIFERT",
+        "ramal": 251
+    },
+    {
+        "setor": "COMPRAS",
+        "ramal": 276
+    },
+    {
+        "setor": "CONFORTO MÉDICO PS",
+        "ramal": 222
+    },
+    {
+        "setor": "CONFORTO MÉDICO UTI",
+        "ramal": 257
+    },
+    {
+        "setor": "CONSULTÓRIO PEDIATRICO - ONCO",
+        "ramal": 318
+    },
+    {
+        "setor": "CONSULTÓRIO PS",
+        "ramal": 275
+    },
+    {
+        "setor": "COORDENAÇÃO",
+        "ramal": 210
+    },
+    {
+        "setor": "COORDENAÇAO DE FACILITIES",
+        "ramal": 241
+    },
+    {
+        "setor": "COORDENAÇÃO FARMACIA",
+        "ramal": 321
+    },
+    {
+        "setor": "COORDENAÇÃO INFORMÁTICA",
+        "ramal": 269
+    },
+    {
+        "setor": "COPA",
+        "ramal": 327
+    },
+    {
+        "setor": "DIRETOR TÉCNICO",
+        "ramal": 315
+    },
+    {
+        "setor": "DR ALMEIDA",
+        "ramal": 255
+    },
+    {
+        "setor": "DR PEIXOTO",
+        "ramal": 221
+    },
+    {
+        "setor": "DR ROMULO",
+        "ramal": 213
+    },
+    {
+        "setor": "DRA RENATA",
+        "ramal": 253
+    },
+    {
+        "setor": "FARMÁCIA CENTRAL",
+        "ramal": 205
+    },
+    {
+        "setor": "FARMACIA POSTO 1",
+        "ramal": 238
+    },
+    {
+        "setor": "FARMÁCIA SATELITE CENTRO CIRURGICO",
+        "ramal": 319
+    },
+    {
+        "setor": "FAT PARTICULAR (rAMAL 2)",
+        "ramal": 237
+    },
+    {
+        "setor": "FATURAMENTO AMBULATORIO SUS",
+        "ramal": 232
+    },
+    {
+        "setor": "FATURAMENTO CONVÊNIO",
+        "ramal": "208 / 209"
+    },
+    {
+        "setor": "FATURAMENTO ONCOLOGIA",
+        "ramal": 300
+    },
+    {
+        "setor": "FATURAMENTO PARTICULAR",
+        "ramal": 210
+    },
+    {
+        "setor": "FINANCEIRO",
+        "ramal": 258
+    },
+    {
+        "setor": "GERAL",
+        "ramal": 317
+    },
+    {
+        "setor": "GERENCIA DA ONCOLOGIA",
+        "ramal": 284
+    },
+    {
+        "setor": "GERENCIA DE ENFERMAGEM",
+        "ramal": 265
+    },
+    {
+        "setor": "GUARDA INSUMOS",
+        "ramal": 323
+    },
+    {
+        "setor": "LABORATÓRIO ÁREA TÉCNICA",
+        "ramal": 252
+    },
+    {
+        "setor": "LAVANDERIA",
+        "ramal": 214
+    },
+    {
+        "setor": "MANUTENÇÃO",
+        "ramal": 279
+    },
+    {
+        "setor": "ONCOLOGIA AUTORIZAÇÃO",
+        "ramal": 224
+    },
+    {
+        "setor": "ONCOLOGIA PEDIATRICA",
+        "ramal": 310
+    },
+    {
+        "setor": "OUVIDARIA EXTERNA",
+        "ramal": "2101-3930"
+    },
+    {
+        "setor": "OUVIDORIA",
+        "ramal": 233
+    },
+    {
+        "setor": "OUVIDORIA INTERNA",
+        "ramal": 230
+    },
+    {
+        "setor": "PATOLOGIA",
+        "ramal": 308
+    },
+    {
+        "setor": "POSTO 1",
+        "ramal": 247
+    },
+    {
+        "setor": "POSTO 2",
+        "ramal": 248
+    },
+    {
+        "setor": "POSTO 3",
+        "ramal": 297
+    },
+    {
+        "setor": "PRÓ INFANCIA",
+        "ramal": 256
+    },
+    {
+        "setor": "PRODUÇÃO",
+        "ramal": 252
+    },
+    {
+        "setor": "PSICOLOGIA",
+        "ramal": 260
+    },
+    {
+        "setor": "RECEBIMENTO FISCAL",
+        "ramal": 227
+    },
+    {
+        "setor": "RECEPÇÃO CONSULTÓRIOS",
+        "ramal": 216
+    },
+    {
+        "setor": "RECEPÇÃO DR FERNANDES",
+        "ramal": 280
+    },
+    {
+        "setor": "RECEPÇÃO ELETIVA",
+        "ramal": 273
+    },
+    {
+        "setor": "RECEPÇÃO EXTERNA",
+        "ramal": "2101-3920"
+    },
+    {
+        "setor": "RECEPÇÃO ONCO ADULTO",
+        "ramal": "215 / 271"
+    },
+    {
+        "setor": "RECEPÇÃO ONCO PEDIÁTRICA",
+        "ramal": 310
+    },
+    {
+        "setor": "RECEPÇÃO PS",
+        "ramal": 201
+    },
+    {
+        "setor": "RECEPÇÃO ULTRASSOM",
+        "ramal": 262
+    },
+    {
+        "setor": "RECURSO DE GLOSA",
+        "ramal": 207
+    },
+    {
+        "setor": "REVISÃO DE CONTAS",
+        "ramal": 240
+    },
+    {
+        "setor": "RH",
+        "ramal": 259
+    },
+    {
+        "setor": "SAC",
+        "ramal": 233
+    },
+    {
+        "setor": "SALA DE COLETA",
+        "ramal": 267
+    },
+    {
+        "setor": "SALA DE MEDICAÇÃO ADULTO PS",
+        "ramal": 274
+    },
+    {
+        "setor": "SALA DE MEDICAÇÃO PEDIATRICA",
+        "ramal": 223
+    },
+    {
+        "setor": "SALA DE QUIMIO ADULTO",
+        "ramal": 229
+    },
+    {
+        "setor": "SALA DE QUIMIO PEDIÁTRICA",
+        "ramal": 314
+    },
+    {
+        "setor": "SALA DE ULTRASSOM",
+        "ramal": 286
+    },
+    {
+        "setor": "SESMT",
+        "ramal": 272
+    },
+    {
+        "setor": "TELEFONIA",
+        "ramal": 204
+    },
+    {
+        "setor": "ULTRASSOM EXTERNA",
+        "ramal": "2101-3962"
+    },
+    {
+        "setor": "UNIDADE TRANSFUSIONAL",
+        "ramal": 236
+    },
+    {
+        "setor": "UTI ADULTO",
+        "ramal": 263
+    },
+    {
+        "setor": "UTI NEO",
+        "ramal": 277
+    },
+    {
+        "setor": "UTI PEDIÁTRICA",
+        "ramal": 282
+    }
+]

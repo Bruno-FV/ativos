@@ -3,6 +3,7 @@ package com.hsr.ativos.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,6 +33,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+                .cors(Customizer.withDefaults())
                 .cors(cors -> {
                 })
                 .authorizeHttpRequests(auth -> auth
@@ -51,7 +53,9 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin("http://localhost"); // origem do frontend 
         configuration.addAllowedOrigin("http://localhost:8082"); // origem do frontend 
+        configuration.addAllowedOrigin("http://192.168.254.62"); // se acessar via IP 
         configuration.addAllowedOrigin("http://192.168.254.62:8082"); // se acessar via IP 
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");

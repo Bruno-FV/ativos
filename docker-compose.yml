@@ -1,37 +1,54 @@
-version: '3.8'
 services:
   db:
-    image: postgres:15
+    image: postgres:17
     environment:
       POSTGRES_DB: bd_ativos
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: dtihsr@2018
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./docker/db/backup-Ativos.sql:/docker-entrypoint-initdb.d/backup.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - ativos-network
 
   back-ativos:
-    build: .
+    # image: ghcr.io/bruno-fv/ativos-backend:latest
+    # For testing locally, uncomment the line below and comment the above
+    image: back-ativos-back-ativos:latest
     ports:
-      - "8081:8081"
+      - "8081:8080"
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/bd_ativos
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: dtihsr@2018
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - ativos-network
 
   front-ativos:
-    build:
-      context: ../front-ativos-main
-      dockerfile: Dockerfile
+    image: ghcr.io/bruno-fv/front-ativos:latest
     ports:
       - "80:80"
     depends_on:
       - back-ativos
+    networks:
+      - ativos-network
+
+  watchtower:
+    image: containrrr/watchtower
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --label-enable --cleanup
     networks:
       - ativos-network
 
