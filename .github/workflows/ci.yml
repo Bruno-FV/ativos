@@ -8,10 +8,14 @@ on:
 
 jobs:
   build-and-test:
+    name: Build and Test (Backend + Frontend)
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    # ===============================
+    # BACKEND
+    # ===============================
+    - name: Checkout backend repository
       uses: actions/checkout@v4
 
     - name: Set up JDK 17
@@ -20,57 +24,70 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Cache Maven packages
+    - name: Cache Maven dependencies
       uses: actions/cache@v4
       with:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
+        restore-keys: |
+          ${{ runner.os }}-m2-
 
-    - name: Build backend with Maven
+    - name: Build backend (skip tests)
       run: mvn clean package -DskipTests
 
     - name: Run backend tests
       run: mvn test
 
+    # ===============================
+    # FRONTEND
+    # ===============================
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
 
-    - name: Checkout frontend code
+    - name: Checkout frontend repository
       uses: actions/checkout@v4
       with:
-        repository: ${{ github.repository_owner }}/front-ativos-main
-        path: front-ativos-main
+        repository: Bruno-FV/front-ativos
+        token: ${{ secrets.FRONT_REPO_TOKEN }}
+        path: front-ativos
 
     - name: Install frontend dependencies
       run: |
-        cd front-ativos-main
+        cd front-ativos
         npm ci
 
     - name: Build frontend
       run: |
-        cd front-ativos-main
+        cd front-ativos
         npm run build
 
     - name: Run frontend lint
       run: |
-        cd front-ativos-main
+        cd front-ativos
         npm run lint
 
   build-docker:
+    name: Build & Push Docker Images (GHCR)
     needs: build-and-test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+
     permissions:
       contents: read
       packages: write
 
     steps:
-    - name: Checkout code
+    # ===============================
+    # CHECKOUT BACKEND
+    # ===============================
+    - name: Checkout backend repository
       uses: actions/checkout@v4
 
+    # ===============================
+    # LOGIN GHCR
+    # ===============================
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v3
       with:
@@ -78,6 +95,9 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    # ===============================
+    # BUILD & PUSH BACKEND IMAGE
+    # ===============================
     - name: Build and push backend Docker image
       uses: docker/build-push-action@v5
       with:
@@ -87,15 +107,22 @@ jobs:
           ghcr.io/bruno-fv/ativos-backend:latest
           ghcr.io/bruno-fv/ativos-backend:main
 
-    - name: Checkout frontend code
+    # ===============================
+    # CHECKOUT FRONTEND
+    # ===============================
+    - name: Checkout frontend repository
       uses: actions/checkout@v4
       with:
-        repository: ${{ github.repository_owner }}/front-ativos-main
-        path: front-ativos-main
+        repository: Bruno-FV/front-ativos
+        token: ${{ secrets.FRONT_REPO_TOKEN }}
+        path: front-ativos
 
+    # ===============================
+    # BUILD & PUSH FRONTEND IMAGE
+    # ===============================
     - name: Build and push frontend Docker image
       uses: docker/build-push-action@v5
       with:
-        context: front-ativos-main
+        context: front-ativos
         push: true
         tags: ghcr.io/bruno-fv/front-ativos:latest
