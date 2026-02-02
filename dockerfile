@@ -4,6 +4,7 @@ WORKDIR /workspace
 COPY mvnw pom.xml ./
 COPY .mvn .mvn
 COPY src src
+RUN sed -i 's/\r$//' mvnw
 RUN chmod +x mvnw
 RUN ./mvnw -B -DskipTests package
 
