@@ -53,10 +53,13 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost"); // origem do frontend 
-        configuration.addAllowedOrigin("http://localhost:8082"); // origem do frontend 
+       //configuration.addAllowedOriginPattern("*"); // origem do frontend 
+       // configuration.addAllowedOrigin("http://localhost"); // origem do frontend 
+       // configuration.addAllowedOrigin("http://localhost:80"); // origem do frontend 
+       // configuration.addAllowedOrigin("http://localhost:8082"); // origem do frontend 
         configuration.addAllowedOrigin("http://192.168.254.62"); // se acessar via IP 
         configuration.addAllowedOrigin("http://192.168.254.62:8082"); // se acessar via IP 
+        //configuration.addAllowedOrigin("http://192.168.254.62:80"); // se acessar via IP 
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         configuration.setAllowCredentials(true); 
