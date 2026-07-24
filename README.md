@@ -1,330 +1,443 @@
-# Front Ativos
+# Ativos API
 
-![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
-![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-38BDF8?logo=tailwindcss)
-![Spring Boot](https://img.shields.io/badge/API-Spring%20Boot-6DB33F?logo=springboot)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql)
-![License](https://img.shields.io/badge/license-MIT-blue)
+API REST desenvolvida em Java com Spring Boot para gerenciamento de ativos de TI.
 
-Sistema desenvolvido para realizar o gerenciamento de ativos de TI de uma empresa.
+Esse projeto é responsável por toda a regra de negócio da aplicação **Front Ativos**, armazenando, validando e disponibilizando as informações consumidas pelo Front-end.
 
-A aplicação permite organizar informações de equipamentos como computadores, roteadores, impressoras, licenças de software e ramais, oferecendo uma interface simples para consulta, cadastro e gerenciamento dos ativos.
-
-Esse projeto faz parte dos meus estudos em desenvolvimento Full Stack utilizando React no Front-end e Spring Boot no Back-end.
-
-A ideia principal sempre foi criar uma aplicação que se aproximasse de um cenário real encontrado dentro de empresas de suporte e infraestrutura de TI.
+O objetivo sempre foi construir uma API organizada, escalável e próxima de um ambiente corporativo, seguindo a arquitetura utilizada na maioria das aplicações Java modernas.
 
 ---
 
 # Objetivo
 
-Grande parte das empresas ainda controlam seus ativos utilizando planilhas.
+Resolvi desenvolver essa API para centralizar essas informações em um banco de dados, disponibilizando tudo através de uma API REST que pode ser consumida por qualquer aplicação.
 
-O objetivo desse projeto é centralizar essas informações em uma aplicação web, permitindo consultar rapidamente qualquer equipamento cadastrado.
-
-Além disso, o projeto serve como laboratório para estudar integração entre Front-end e Back-end utilizando tecnologias modernas.
+Atualmente ela é utilizada pelo projeto **Front Ativos**, desenvolvido em React.
 
 ---
 
 # Tecnologias utilizadas
 
-### Front-end
+- Java 17
+- Spring Boot
+- Spring Web
+- Spring Data JPA
+- Spring Security
+- JWT
+- Hibernate
+- PostgreSQL
+- Maven
+- Docker
+- Docker Compose
 
-- React
-- TypeScript
-- Vite
-- Tailwind CSS
-- shadcn/ui
-- Radix UI
-- React Router
-- React Hook Form
+---
+
+# Arquitetura
+
+A aplicação segue uma arquitetura em camadas.
+
+```
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Banco de Dados
+```
+
+Cada camada possui uma responsabilidade específica.
+
+### Controllers
+
+Recebem as requisições HTTP e retornam as respostas da API.
+
+### Services
+
+Concentram toda a regra de negócio.
+
+### Repositories
+
+Realizam o acesso ao banco utilizando Spring Data JPA.
+
+### Models
+
+Representam as entidades persistidas.
+
+### DTOs
+
+Responsáveis por transportar dados entre cliente e servidor.
 
 ---
 
 # Estrutura do projeto
 
 ```
-src
+src/main/java
+
+config
 │
-├── assets
-│      imagens e ícones
+controller
 │
-├── components
-│      componentes reutilizáveis
+dtos
 │
-├── hooks
-│      hooks personalizados
+enums
 │
-├── layouts
-│      estrutura principal das páginas
+models
 │
-├── lib
-│      funções auxiliares
+repositorys
 │
-├── pages
-│      páginas do sistema
+security
 │
-├── services
-│      comunicação com API
+services
 │
-├── types
-│      interfaces TypeScript
+scheduler
 │
-├── App.tsx
+utils
 │
-└── main.tsx
+AtivosApplication.java
 ```
 
-A ideia foi separar cada responsabilidade em sua própria pasta para facilitar a manutenção do projeto conforme ele cresce.
+Cada pacote possui uma responsabilidade bem definida, facilitando futuras manutenções.
 
 ---
 
 # Funcionalidades
 
-Atualmente o sistema possui gerenciamento para diversos tipos de ativos.
+Atualmente a API disponibiliza endpoints para gerenciamento de diversos ativos da empresa.
 
 ## Máquinas
 
-Permite visualizar todos os computadores cadastrados.
+Permite:
 
-Cada equipamento possui informações como:
+- cadastrar
+- consultar
+- editar
+- remover
+
+Informações armazenadas:
 
 - Hostname
 - Endereço IP
 - Sistema Operacional
 - Processador
-- Memória RAM
+- Memória
 - Armazenamento
-- Tipo do armazenamento
-- Antivírus instalado
+- Tipo de armazenamento
+- Antivírus
 - Licença Office
 - Status
-
-Também é possível realizar operações de cadastro, edição e remoção.
 
 ---
 
 ## Roteadores
 
-Tela responsável pelo gerenciamento dos roteadores da empresa.
-
-Possibilita visualizar:
-
-- Nome
-- Endereço IP
-- Status
-- Demais informações cadastradas
+Gerenciamento completo dos roteadores cadastrados.
 
 ---
 
 ## Impressoras
 
-Permite controlar todas as impressoras cadastradas.
-
-Facilitando a localização dos equipamentos e sua organização.
+Cadastro e gerenciamento das impressoras.
 
 ---
 
 ## Ramais
 
-Área destinada ao gerenciamento dos ramais telefônicos da empresa.
-
-Possibilita consultar rapidamente cada ramal cadastrado.
+Gerenciamento dos ramais telefônicos.
 
 ---
 
-## Licenças
+## Antivírus
 
-Tela destinada ao controle de licenças de software.
-
-Ajuda a manter organizado quais equipamentos possuem licenças instaladas.
+Controle das informações relacionadas aos antivírus instalados.
 
 ---
 
-## Login
+## Usuários
 
-O sistema também possui telas de autenticação para acesso à aplicação.
-
----
-
-# Interface
-
-Durante o desenvolvimento procurei criar uma interface limpa e fácil de utilizar.
-
-Para isso utilizei o **shadcn/ui**, que fornece componentes modernos e altamente personalizáveis.
-
-Entre eles:
-
-- Dialogs
-- Sidebar
-- Cards
-- Alert Dialog
-- Inputs
-- Forms
-- Botões
-- Componentes de navegação
-
-Isso deixou o desenvolvimento muito mais organizado e com uma aparência profissional.
+A API também possui gerenciamento de usuários para autenticação da aplicação.
 
 ---
 
-# Comunicação com o Back-end
+# Autenticação
+
+O projeto utiliza autenticação baseada em JWT.
+
+Fluxo:
+
+```
+Login
+
+↓
+
+Spring Security
+
+↓
+
+Validação do usuário
+
+↓
+
+Geração do Token JWT
+
+↓
+
+Cliente recebe Token
+
+↓
+
+Token enviado no Header
+
+↓
+
+API valida Token
+
+↓
+
+Acesso liberado
+```
+
+Essa abordagem evita manter sessões abertas no servidor e é amplamente utilizada em aplicações REST.
+
 ---
 
-O Front-end não possui regra de negócio.
+# Comunicação com o Front-end
 
-Toda a lógica de persistência fica no Back-end desenvolvido em Spring Boot.
-
-O React é responsável por:
-
-- realizar as requisições para a API;
-- exibir os dados recebidos;
-- enviar informações de cadastro;
-- atualizar registros;
-- remover registros;
-- apresentar mensagens para o usuário.
-
-Todo o fluxo acontece consumindo endpoints REST.
+O Front-end consome todos os recursos disponibilizados pela API.
 
 Fluxo da comunicação:
 
 ```
-Usuário
-
-↓
-
 React
 
 ↓
 
-Services
+Axios
 
 ↓
 
-API Spring Boot
+HTTP REST
 
 ↓
 
-Banco de Dados
+Spring Boot
 
 ↓
 
-API Spring Boot
+Service
 
 ↓
 
-React
+Repository
 
 ↓
 
-Tela atualizada
+PostgreSQL
+```
+
+Após o processamento, a resposta retorna para o Front-end em formato JSON.
+
+---
+
+# Banco de dados
+
+A persistência dos dados é realizada utilizando PostgreSQL.
+
+O acesso ao banco acontece através do Spring Data JPA.
+
+Isso elimina a necessidade de escrever SQL manual para as operações básicas.
+
+Exemplo das operações disponíveis:
+
+- INSERT
+- UPDATE
+- DELETE
+- SELECT
+- Paginação
+- Consultas personalizadas
+
+---
+
+# Docker
+
+O projeto possui configuração para execução utilizando Docker.
+
+Isso permite subir toda a aplicação de maneira rápida e padronizada.
+
+Além disso existe um backup do banco para facilitar testes e desenvolvimento.
+
+---
+
+# Scheduler
+
+A aplicação também possui configuração para execução de tarefas agendadas.
+
+Esse recurso permite automatizar processos periódicos quando necessário.
+
+---
+
+# Fluxo de uma requisição
+
+Cadastro de máquina
+
+```
+Cliente
+
+↓
+
+POST /machines
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Validação
+
+↓
+
+Repository
+
+↓
+
+PostgreSQL
+
+↓
+
+Repository
+
+↓
+
+Service
+
+↓
+
+Controller
+
+↓
+
+Resposta JSON
 ```
 
 ---
 
-# Organização dos componentes
+# Organização do código
 
-Procurei dividir a interface em pequenos componentes reutilizáveis.
+Durante o desenvolvimento procurei separar bem as responsabilidades.
 
-Exemplo:
+Isso evita que Controllers fiquem grandes e concentra toda a lógica de negócio dentro da camada Service.
 
-```
-MachineCard
-
-↓
-
-MachineGrid
-
-↓
-
-MachineFormDialog
-
-↓
-
-DeleteConfirmDialog
-
-↓
-
-StatsBar
-
-↓
-
-SearchBar
-```
-
-Essa abordagem deixa o código mais organizado e evita repetição.
-
-Além disso, facilita futuras manutenções.
+Essa organização facilita testes, manutenção e futuras evoluções.
 
 ---
 
 # Principais aprendizados
 
-Durante o desenvolvimento consegui praticar diversos conceitos importantes.
+Durante esse projeto consegui praticar diversos conceitos importantes.
 
 Entre eles:
 
-- Componentização
-- React Hooks
-- React Router
-- TypeScript
-- Comunicação com API REST
-- Organização de projetos React
-- Gerenciamento de formulários
-- Estruturação de componentes reutilizáveis
-- Integração Front-end e Back-end
-- Organização de código para projetos maiores
+- Spring Boot
+- Spring Security
+- JWT
+- Spring Data JPA
+- Hibernate
+- Docker
+- PostgreSQL
+- Arquitetura em Camadas
+- DTOs
+- Boas práticas em APIs REST
+- Organização de projetos Java
+- Integração com Front-end React
 
 ---
 
-# Como executar o projeto
+# Desafios encontrados
 
-## Clonar o repositório
+Durante o desenvolvimento alguns desafios precisaram ser resolvidos.
+
+## CORS
+
+Foi necessário configurar corretamente o Spring para permitir acesso do Front-end.
+
+---
+
+## Modelagem
+
+Organizar as entidades mantendo o código desacoplado exigiu uma boa modelagem.
+
+---
+
+## Segurança
+
+Implementar autenticação utilizando JWT foi um dos principais desafios do projeto.
+
+---
+
+## Integração
+
+Manter Front-end e Back-end sincronizados durante a evolução da aplicação exigiu bastante atenção principalmente na estrutura dos DTOs.
+
+---
+
+# Como executar
+
+## Clonar
 
 ```bash
-git clone https://github.com/Bruno-FV/front-ativos.git
+git clone https://github.com/Bruno-FV/ativos.git
 ```
 
-## Instalar as dependências
+## Instalar dependências
 
 ```bash
-npm install
+mvn clean install
 ```
 
 ## Executar
 
 ```bash
-npm run dev
+mvn spring-boot:run
 ```
 
-O Vite iniciará a aplicação normalmente.
+Ou utilizando sua IDE favorita.
 
 ---
 
-# Melhorias futuras
+# Roadmap
 
-O projeto continua em desenvolvimento.
-
-Algumas melhorias planejadas são:
-
-- Dashboard com indicadores
-- Filtros avançados
-- Exportação de relatórios
-- Controle de usuários
-- Histórico de alterações
-- Paginação
-- Melhorias na responsividade
-- Dark Mode completo
-- Integração com autenticação JWT
+- ✅ CRUD de Máquinas
+- ✅ CRUD de Roteadores
+- ✅ CRUD de Impressoras
+- ✅ CRUD de Ramais
+- ✅ CRUD de Antivírus
+- ✅ Autenticação JWT
+- ✅ Docker
+- ✅ PostgreSQL
+- ⏳ Dashboard administrativo
+- ⏳ Auditoria
+- ⏳ Logs centralizados
+- ⏳ Testes automatizados
+- ⏳ Documentação Swagger
 
 ---
 
 # Considerações finais
 
-Esse projeto foi desenvolvido com foco em praticar tecnologias modernas do ecossistema React e entender melhor como funciona a comunicação entre Front-end e Back-end.
+Esse projeto representa a parte Back-end da aplicação Front Ativos.
 
-Ao longo do desenvolvimento procurei organizar o código utilizando componentes reutilizáveis, separação de responsabilidades e uma estrutura que facilite futuras evoluções da aplicação.
+Durante o desenvolvimento procurei seguir uma arquitetura organizada, separando responsabilidades entre Controllers, Services, Repositories e Models.
 
-Além de servir como projeto de estudo, ele também representa uma solução que poderia ser utilizada em um ambiente corporativo para auxiliar no gerenciamento de ativos de TI.
+Além de servir como projeto de estudo, ele foi pensado para reproduzir a estrutura utilizada em aplicações corporativas, permitindo praticar conceitos como autenticação JWT, integração com banco de dados, arquitetura em camadas e desenvolvimento de APIs REST utilizando Spring Boot.
